@@ -81,8 +81,6 @@ public class User implements Serializable, UserDetails {
 	public Set<Role> getRoles() {
 		return roles;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -110,9 +108,8 @@ public class User implements Serializable, UserDetails {
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {		
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
-				.collect(Collectors.toList());
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 
 	@Override
@@ -139,6 +136,5 @@ public class User implements Serializable, UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
 
 }
