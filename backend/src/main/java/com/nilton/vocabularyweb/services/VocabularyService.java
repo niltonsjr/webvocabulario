@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,18 @@ public class VocabularyService {
 	}
 	
 	@Transactional(readOnly = true)
+	public VocabularyDTO findRandom() {
+		Long qty = repository.count();
+		int idx = (int) (Math.random() * qty);
+		Page<Vocabulary> list = repository.findAll(PageRequest.of(idx, 1));
+		Vocabulary entity = null;
+		if (list.hasContent()) {
+			entity = list.getContent().get(0);
+		}
+		return new VocabularyDTO(entity);
+	}
+	
+	@Transactional(readOnly = true)
 	public VocabularyDTO findById(Long id) {
 		Optional<Vocabulary> obj = repository.findById(id);
 		Vocabulary entity = obj.orElseThrow(() -> new ResourceNotFoundException("No se ha localizado la entidad"));
@@ -46,6 +59,7 @@ public class VocabularyService {
 		return new VocabularyDTO(entity);
 	}
 	
+	@Transactional
 	public VocabularyDTO update(Long id, VocabularyDTO dto) {
 		try {
 			Vocabulary entity = repository.getOne(id);

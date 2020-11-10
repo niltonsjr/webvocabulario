@@ -46,6 +46,12 @@ public class VocabularyResource {
 		return ResponseEntity.ok().body(dto);
 	}
 
+	@GetMapping(value = "/random")
+	public ResponseEntity<VocabularyDTO> findRandom() {
+		VocabularyDTO dto = service.findRandom();
+		return ResponseEntity.ok().body(dto);
+	}
+
 	@PostMapping
 	public ResponseEntity<VocabularyDTO> insert(@Valid @RequestBody VocabularyDTO dto) {
 		dto = service.insert(dto);

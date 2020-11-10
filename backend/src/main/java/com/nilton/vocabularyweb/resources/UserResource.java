@@ -51,11 +51,11 @@ public class UserResource {
 	
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
-		UserDTO newDTO = service.insert(dto);
+		UserDTO newDTO  = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newDTO.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(newDTO);		
+		return ResponseEntity.created(uri).body(newDTO);
 	}
 	
 	@PutMapping(value = "/{id}")

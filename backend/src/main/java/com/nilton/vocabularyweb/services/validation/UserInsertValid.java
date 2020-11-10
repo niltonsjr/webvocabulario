@@ -14,9 +14,9 @@ import javax.validation.Payload;
 public @interface UserInsertValid {
 	
 	String message() default "Validation error";
-	
+
 	Class<?>[] groups() default {};
-	
-	Class<? extends Payload>[] payload() default{};
+
+	Class<? extends Payload>[] payload() default {};
 
 }

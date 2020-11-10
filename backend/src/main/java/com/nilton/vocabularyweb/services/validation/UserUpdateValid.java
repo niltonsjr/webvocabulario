@@ -15,7 +15,7 @@ public @interface UserUpdateValid {
 
 	String message() default "Validation error";
 
-	Class<?>[] grous() default {};
+	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
 }
